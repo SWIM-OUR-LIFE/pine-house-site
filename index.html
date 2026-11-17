@@ -15,6 +15,47 @@ section{padding:72px 0}.soft{background:#f6faff}.head{text-align:center;margin-b
 @media(max-width:760px){nav{display:none}.hero{padding:55px 0}.hero-grid,.contact{grid-template-columns:1fr}.hero img{height:280px}.cards,.prices,.reviews{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery img{height:160px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.notice ul{columns:1}.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;background:white;padding:9px 12px;gap:9px;box-shadow:0 -4px 18px #123b6020;z-index:8}.mobile a{flex:1;text-align:center;background:var(--blue);color:white;border-radius:25px;padding:11px;font-weight:bold;font-size:13px}.mobile a:first-child{background:var(--pale);color:var(--blue)}body{padding-bottom:65px}section{padding:55px 0}}
 @media(max-width:430px){.gallery{grid-template-columns:1fr}.gallery img{height:210px}.hero h1{font-size:39px}}
 
+/* Mobile-only typography optimization: desktop styles remain unchanged */
+@media(max-width:760px){
+  body{font-size:14px;line-height:1.6}
+  .brand{font-size:19px}
+  .brand small{font-size:8px}
+  .hero{padding:42px 0}
+  .hero h1{font-size:34px;line-height:1.22;letter-spacing:-1.3px;margin:14px 0}
+  .hero p{font-size:15px;line-height:1.65}
+  .eyebrow{font-size:10px;letter-spacing:1.6px}
+  section{padding:44px 0}
+  .head{margin-bottom:26px}
+  .head h2{font-size:25px;line-height:1.3}
+  .head p{font-size:14px;line-height:1.55}
+  .card,.price,.review{padding:19px}
+  .card h3,.price h3{font-size:17px}
+  .card p,.price p,.review p{font-size:13px;line-height:1.6}
+  .gallery figcaption{font-size:14px;padding:10px}
+  .price strong{font-size:23px}
+  .price ul,.notice ul{font-size:12px;line-height:1.7}
+  .notice{padding:18px}
+  .notice h3{font-size:17px}
+  .faq button{font-size:14px;padding:15px 4px}
+  .answer{font-size:13px;line-height:1.65}
+  .contact-info{padding:22px}
+  .contact-info h3{font-size:18px}
+  .contact-info strong{font-size:21px}
+  .form{padding:19px}
+  .field label{font-size:12px}
+  .field input,.field select,.field textarea{font-size:14px}
+  .hint,.review small{font-size:11px}
+  .btn,.cta{font-size:14px}
+}
+@media(max-width:430px){
+  .hero{padding:36px 0}
+  .hero h1{font-size:31px;line-height:1.25;letter-spacing:-1px}
+  .hero p{font-size:14px}
+  .head h2{font-size:23px}
+  .head p{font-size:13px}
+  .mobile a{font-size:12px}
+}
+
 .foam-kitchen{position:relative;overflow:hidden}.foam-kitchen:after{content:"";position:absolute;left:0;right:0;top:45%;height:38%;pointer-events:none;background:radial-gradient(ellipse at 12% 75%,rgba(255,255,255,.96) 0 8%,transparent 9%),radial-gradient(ellipse at 28% 90%,rgba(255,255,255,.92) 0 11%,transparent 12%),radial-gradient(ellipse at 48% 78%,rgba(255,255,255,.94) 0 10%,transparent 11%),radial-gradient(ellipse at 68% 92%,rgba(255,255,255,.9) 0 12%,transparent 13%),radial-gradient(ellipse at 88% 72%,rgba(255,255,255,.92) 0 9%,transparent 10%);opacity:.9}
 </style>
 </head>
