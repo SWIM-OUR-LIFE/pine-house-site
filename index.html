@@ -203,32 +203,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic"
     <div class="eyebrow">FIELD WORK LOG</div>
     <h2>작업자의 현장 기록</h2>
   </div>
-  <div class="fieldlog-grid">
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▶</span><strong>작업 영상 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">01 · DISASSEMBLY</span><h3>탈거청소</h3></div>
-    </article>
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▧</span><strong>현장 사진 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">02 · BATHROOM</span><h3>욕실 청소 및 위생관리</h3></div>
-    </article>
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▶</span><strong>작업 영상 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">03 · FLOOR & MOLDING</span><h3>전체 바닥 및 몰딩</h3></div>
-    </article>
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▧</span><strong>현장 사진 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">04 · KITCHEN</span><h3>주방 기름때 제거</h3></div>
-    </article>
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▶</span><strong>작업 영상 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">05 · WINDOWS & SASH</span><h3>유리창 및 샷시 청소</h3></div>
-    </article>
-    <article class="field-card">
-      <div class="field-media field-placeholder"><span class="field-media-icon">▧</span><strong>현장 사진 준비 중</strong></div>
-      <div class="field-card-body"><span class="field-tag">06 · BALCONY</span><h3>베란다 청소</h3></div>
-    </article>
-  </div>
+  <div class="fieldlog-grid" id="fieldlogPosts"><p class="hint">등록된 작업 현장 기록이 없습니다.</p></div>
 </div>
 </section>
 <section id="faq"><div class="wrap"><div class="head"><div class="eyebrow">FAQ</div><h2>자주 묻는 질문</h2></div><div class="faq"><div class="faq-item"><button type="button">견적은 어떻게 받을 수 있나요?　＋</button><div class="answer">아래 견적 문의 양식에 지역, 평수, 희망 날짜와 요청사항을 남겨주시면 확인 후 상담하는 방식입니다.</div></div><div class="faq-item"><button type="button">추가 비용은 언제 발생하나요?　＋</button><div class="answer">기본 범위를 벗어나는 심한 오염, 스티커 제거, 외창 작업, 빌트인 가전 내부 등은 작업 전 안내 후 협의합니다.</div></div><div class="faq-item"><button type="button">청소 시간은 얼마나 걸리나요?　＋</button><div class="answer">평수, 구조, 오염도와 작업 인원에 따라 달라집니다. 예약 상담 시 예상 시간을 안내해 드립니다.</div></div></div></div></section>
@@ -333,6 +308,9 @@ document.getElementById('quoteForm').addEventListener('submit',e=>{
  box.classList.add('show');
  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(()=>box.textContent+='\\n(문의 내용이 클립보드에 복사되었습니다.)').catch(()=>{});
 });
+
+// FINEHOUSE public field-work posts
+(async()=>{try{const r=await fetch('/api/admin/posts');if(!r.ok)return;const posts=await r.json();const root=document.getElementById('fieldlogPosts');if(!Array.isArray(posts)||!posts.length)return;root.innerHTML='';posts.forEach(post=>{const card=document.createElement('article');card.className='field-card';const media=document.createElement('div');media.className='field-media';if(post.images&&post.images.length){const img=document.createElement('img');img.src=post.images[0];img.alt=post.title||'작업 현장 사진';img.style.cssText='width:100%;height:100%;object-fit:cover';media.appendChild(img)}else{media.classList.add('field-placeholder');media.textContent='사진 없음'}const body=document.createElement('div');body.className='field-card-body';const tag=document.createElement('span');tag.className='field-tag';tag.textContent=post.category||'FIELD WORK';const title=document.createElement('h3');title.textContent=post.title||'';const date=document.createElement('small');date.textContent=post.workDate||'';const desc=document.createElement('p');desc.textContent=post.body||'';body.append(tag,title,date,desc);card.append(media,body);card.style.cursor='pointer';card.addEventListener('click',()=>{const detail=document.createElement('dialog');detail.style.cssText='border:0;border-radius:16px;max-width:760px;width:calc(100% - 28px);padding:24px;box-shadow:0 15px 50px #0003';const h=document.createElement('h2');h.textContent=post.title||'';const d=document.createElement('p');d.className='hint';d.textContent=(post.category||'')+' · '+(post.workDate||'');const text=document.createElement('p');text.style.whiteSpace='pre-wrap';text.textContent=post.body||'';detail.append(h,d);(post.images||[]).forEach(url=>{const image=document.createElement('img');image.src=url;image.alt=post.title||'';image.style.cssText='width:100%;height:auto;border-radius:10px;margin:8px 0';detail.append(image)});detail.append(text);const close=document.createElement('button');close.textContent='닫기';close.className='btn';close.addEventListener('click',()=>detail.close());detail.append(close);document.body.append(detail);detail.showModal();detail.addEventListener('close',()=>detail.remove(),{once:true})});root.append(card)})}catch(e){console.warn('Field log unavailable',e)}})();
 </script>
 </body></html>
 <style>
